@@ -8,10 +8,19 @@ app.use(bodyParser.json())
 
 mongoose.connect('mongodb://localhost/devdbtest')
 mongoose.Promise = global.Promise
+mongoose.connection.once('open', ()=> {
+    console.log('Koneksi telah dibuat, buat todo');
+}).on('error', (error) => {
+    console.log('koneksi error', error.message);
+})
+
 
 app.get('/', (req,res) => {
     res.send('sukses')
 })
+
+const api = require('./routers/api')
+app.use('/api', api)
 
  app.listen(port, (err) => {
      if (!err)

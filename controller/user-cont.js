@@ -26,20 +26,15 @@ const findone = (req,res) => {
     })
 }
 
-const create = (req,res => {
-    User.create(
-        {
-            username : req.body.username,
-            email: req.body.email
-        }
-    )
+const create = (req,res) => {
+    User.create(req.body)
     .then(user => {
         res.status(200).send(user)
     })
     .catch(err => {
         res.status(500).send(err)
     })
-})
+}
 
 
 const findAndUpdate = (req,res) => {
