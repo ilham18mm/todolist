@@ -21,6 +21,9 @@ app.get('/', (req,res) => {
 
 const api = require('./routers/api')
 app.use('/api', api)
+app.use((err,req,res,next) => {
+    res.status(500).send({error: err})
+})
 
  app.listen(port, (err) => {
      if (!err)

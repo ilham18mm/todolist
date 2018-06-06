@@ -26,27 +26,17 @@ const findone = (req,res) => {
     })
 }
 
-const create = (req,res) => {
+const create = (req,res, next ) => {
     User.create(req.body)
     .then(user => {
         res.status(200).send(user)
-    })
-    .catch(err => {
-        res.status(500).send(err)
-    })
+    }).catch(next)
 }
 
 
 const findAndUpdate = (req,res) => {
     User.findByIdAndUpdate(
-        {
-            _id : req.params.id
-        },
-        {
-            username : req.body.username,
-            password : req.body.password,
-            email : req.body.email
-        }
+        {_id : req.params.id},req.body        
     )
     .then(user => {
         msg = 'succes update one data'
